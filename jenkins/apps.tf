@@ -1,4 +1,4 @@
-data "local_file" "helm_chart_values" {
+data  "local_file" "helm_chart_values" {
   filename = "${path.module}/values.yaml"
 }
  
