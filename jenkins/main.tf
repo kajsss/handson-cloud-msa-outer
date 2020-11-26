@@ -1,42 +1,35 @@
-/*****************************************
-  Google Provider Configuration
- *****************************************/
+terraform {
+  required_version = ">= 0.12"
+}
+ 
 provider "google" {
-  version = "~>  3.1"
+  version = "~> 3.47.0"
+  project = var.project_id
+  region  = var.region
 }
-
+ 
 provider "google-beta" {
-  version = "~>  3.1"
+  version = "~> 3.47.0"
+  project = var.project_id
+  region  = var.region
 }
-
+ 
 /*****************************************
   Kubernetes provider configuration
  *****************************************/
 provider "kubernetes" {
-  version                = "~> 1.10"
+  version                = "~> 1.13"
   load_config_file       = false
-  host                   = module.jenkins-gke.endpoint
+  host                   = google_container_cluster.primary.endpoint
   token                  = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(module.jenkins-gke.ca_certificate)
+  cluster_ca_certificate = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
 }
-
-/*****************************************
-  Helm provider configuration
- *****************************************/
-module "gke_auth" {
-  source  = "terraform-google-modules/kubernetes-engine/google//modules/auth"
-  version = "~> 9.1"
-
-  project_id   = module.enables-google-apis.project_id
-  cluster_name = module.jenkins-gke.name
-  location     = module.jenkins-gke.location
-}
-
+ 
 provider "helm" {
   kubernetes {
     load_config_file       = false
-    cluster_ca_certificate = module.gke_auth.cluster_ca_certificate
-    host                   = module.gke_auth.host
-    token                  = module.gke_auth.token
+    cluster_ca_certificate = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
+    host                   = google_container_cluster.primary.endpoint
+    token                  = data.google_client_config.default.access_token
   }
 }
