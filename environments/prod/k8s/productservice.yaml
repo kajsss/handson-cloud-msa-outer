@@ -46,18 +46,4 @@ spec:
     port: 8092
     targetPort: 8092
 
----
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: eshop-productservice
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: deployment
-    name: eshop-productservice
-miniReplicas: 2
-maxReplicas: 10
-targetCPUUtilizationPercentage: 50
-
 
