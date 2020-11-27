@@ -27,7 +27,7 @@ resource "google_container_cluster" "primary" {
     }
   }
 
-  cluster_autoscailing {
+  cluster_autoscaling {
     enabled = true
     resource_limits {
       resource_type = "cpu"
