@@ -5,6 +5,6 @@ metadata:
   namespace: eshop-app
 spec:
   host: "*.default.svc.cluster.local"
-  trraicPolicy:
+  trafficPolicy:
     tls:
       mode: DISABLE
