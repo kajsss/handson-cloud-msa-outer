@@ -65,17 +65,9 @@ module "gke_auth" {
 }
  
 resource "kubernetes_namespace" "default" {
-    id = "default"
-
     metadata {
         annotations      = {}
-        generation       = 0
         labels           = {}
         name             = "default"
-        resource_version = "143"
-        self_link        = "/api/v1/namespaces/default"
-        uid              = "591ace8e-0f6b-4298-8bb3-a6ba5543019d"
     }
-
-    timeouts {}
 }
