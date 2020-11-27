@@ -71,3 +71,13 @@ resource "kubernetes_namespace" "default" {
         name             = "default"
     }
 }
+
+resource "kubernetes_namespace" "default" {
+    metadata {
+        annotations      = {}
+        labels           = {
+          istio-injection = "enabled"
+        }
+        name             = "default"
+    }
+}
