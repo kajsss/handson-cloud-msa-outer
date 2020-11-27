@@ -63,14 +63,6 @@ module "gke_auth" {
   cluster_name = google_container_cluster.primary.name
   location     = google_container_cluster.primary.location
 }
- 
-resource "kubernetes_namespace" "default" {
-    metadata {
-        annotations      = {}
-        labels           = {}
-        name             = "default"
-    }
-}
 
 resource "kubernetes_namespace" "default" {
     metadata {
