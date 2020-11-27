@@ -83,12 +83,12 @@ module "gke_auth" {
   location     = google_container_cluster.primary.location
 }
  
-resource "kubernetes_namespace" "eshop-app" {
+resource "kubernetes_namespace" "eshop-apps" {
     metadata {
         annotations      = {}
         labels           = {
           istio-injection = "enabled"
         }
-        name             = "eshop-app"
+        name             = "eshop-apps"
     }
 }
