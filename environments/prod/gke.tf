@@ -26,20 +26,22 @@ resource "google_container_cluster" "primary" {
       issue_client_certificate = false
     }
   }
-}
 
-cluster_autoscailing {
-  enabled = true
-  resource_limits {
-    resource_type = "cpu"
-    minimum = 4
-    maximum = 16
+  cluster_autoscailing {
+    enabled = true
+    resource_limits {
+      resource_type = "cpu"
+      minimum = 4
+      maximum = 16
+    }
+    resource_limits {
+      resource_type = "memory"
+      minimum = 16
+      maximum = 60
+    }
   }
-  resource_limits {
-    resource_type = "memory"
-    minimum = 16
-    maximum = 60
-  }
+
+
 }
 
 
